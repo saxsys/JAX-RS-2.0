@@ -10,7 +10,6 @@ import org.glassfish.grizzly.http.server.HttpServer;
 import com.sun.jersey.api.container.grizzly2.GrizzlyServerFactory;
 import com.sun.jersey.api.core.PackagesResourceConfig;
 import com.sun.jersey.api.core.ResourceConfig;
-import com.sun.jersey.api.json.JSONConfiguration;
 
 public class ExampleServer {
 
@@ -37,7 +36,7 @@ public class ExampleServer {
 		ResourceConfig conf = new PackagesResourceConfig("de.saxsys.jax_rs.server");
 
 		// Allow POJO/JSON mapping
-		conf.getFeatures().put(JSONConfiguration.FEATURE_POJO_MAPPING, true);
+		// conf.getFeatures().put(JSONConfiguration.FEATURE_POJO_MAPPING, true);
 
 		// Create server instance
 		return GrizzlyServerFactory.createHttpServer(BASE_URI, conf);
