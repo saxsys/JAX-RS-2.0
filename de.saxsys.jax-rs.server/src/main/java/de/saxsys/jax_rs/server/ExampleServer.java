@@ -6,10 +6,8 @@ import java.net.URI;
 import javax.ws.rs.core.UriBuilder;
 
 import org.glassfish.grizzly.http.server.HttpServer;
-
-import com.sun.jersey.api.container.grizzly2.GrizzlyServerFactory;
-import com.sun.jersey.api.core.PackagesResourceConfig;
-import com.sun.jersey.api.core.ResourceConfig;
+import org.glassfish.jersey.grizzly2.httpserver.GrizzlyHttpServerFactory;
+import org.glassfish.jersey.server.ResourceConfig;
 
 public class ExampleServer {
 
@@ -18,8 +16,10 @@ public class ExampleServer {
 			.port(8180).build();
 
 	public static void main(String[] args) throws IOException {
+		System.out.println("Starting grizzly...");
+
 		// Start server
-		HttpServer httpServer = startServer();
+		HttpServer httpServer = GrizzlyHttpServerFactory.createHttpServer(BASE_URI, createConfig());
 		System.out.printf("Jersey app started at %s. Hit enter to stop it...\n", BASE_URI);
 
 		// Wait for console input
@@ -29,17 +29,9 @@ public class ExampleServer {
 		httpServer.stop();
 	}
 
-	protected static HttpServer startServer() throws IOException {
-		System.out.println("Starting grizzly...");
-
-		// Configure resource package
-		ResourceConfig conf = new PackagesResourceConfig("de.saxsys.jax_rs.server");
-
-		// Allow POJO/JSON mapping
-		// conf.getFeatures().put(JSONConfiguration.FEATURE_POJO_MAPPING, true);
-
-		// Create server instance
-		return GrizzlyServerFactory.createHttpServer(BASE_URI, conf);
+	private static ResourceConfig createConfig() {
+		return new ResourceConfig() //
+				.packages("de.saxsys.jax_rs.server");
 	}
 
 }
