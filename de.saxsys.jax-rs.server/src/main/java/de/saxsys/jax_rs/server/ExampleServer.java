@@ -7,7 +7,6 @@ import javax.ws.rs.core.UriBuilder;
 
 import org.glassfish.grizzly.http.server.HttpServer;
 import org.glassfish.jersey.grizzly2.httpserver.GrizzlyHttpServerFactory;
-import org.glassfish.jersey.jackson.JacksonFeature;
 import org.glassfish.jersey.server.ResourceConfig;
 
 public class ExampleServer {
@@ -33,7 +32,7 @@ public class ExampleServer {
 	private static ResourceConfig createConfig() {
 		return new ResourceConfig() //
 				.packages("de.saxsys.jax_rs.server") //
-				.register(JacksonFeature.class); // Allow JSON mapping
+				.register(PoweredByFilter.class);
 	}
 
 }

@@ -13,7 +13,7 @@ import de.saxsys.jax_rs.server.domain.User;
 public class UserResource {
 
 	@GET
-	@Produces(MediaType.APPLICATION_JSON)
+	@Produces(MediaType.APPLICATION_XML)
 	public User getUser() {
 		User u = new User();
 		u.setUsername("sbley");
