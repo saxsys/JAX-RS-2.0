@@ -2,9 +2,15 @@ package de.saxsys.jax_rs.server.domain;
 
 import java.util.Date;
 
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
+
+@XmlRootElement
 public class User {
 
 	private String username;
+
+	@XmlElement(name = "startDate")
 	private Date entryDate;
 
 	public String getUsername() {
