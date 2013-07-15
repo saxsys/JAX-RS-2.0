@@ -3,6 +3,7 @@ package de.saxsys.jax_rs.server;
 import java.io.IOException;
 import java.net.URI;
 
+import javax.json.stream.JsonGenerator;
 import javax.ws.rs.core.UriBuilder;
 
 import org.glassfish.grizzly.http.server.HttpServer;
@@ -31,7 +32,8 @@ public class ExampleServer {
 
 	private static ResourceConfig createConfig() {
 		return new ResourceConfig() //
-				.packages("de.saxsys.jax_rs.server");
+				.packages("de.saxsys.jax_rs.server")
+				// make it pretty
+				.property(JsonGenerator.PRETTY_PRINTING, true);
 	}
-
 }
