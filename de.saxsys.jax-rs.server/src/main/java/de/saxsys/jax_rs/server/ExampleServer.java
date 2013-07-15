@@ -33,5 +33,4 @@ public class ExampleServer {
 		return new ResourceConfig() //
 				.packages("de.saxsys.jax_rs.server");
 	}
-
 }
