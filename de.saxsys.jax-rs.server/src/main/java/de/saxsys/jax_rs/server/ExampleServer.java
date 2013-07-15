@@ -31,8 +31,7 @@ public class ExampleServer {
 
 	private static ResourceConfig createConfig() {
 		return new ResourceConfig() //
-				.packages("de.saxsys.jax_rs.server") //
-				.register(PoweredByFilter.class);
+				.packages("de.saxsys.jax_rs.server");
 	}
 
 }

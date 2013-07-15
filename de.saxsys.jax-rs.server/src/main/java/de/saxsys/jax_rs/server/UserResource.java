@@ -9,9 +9,10 @@ import javax.ws.rs.core.MediaType;
 
 import de.saxsys.jax_rs.server.domain.User;
 
-@Path("/user")
+@Path("/")
 public class UserResource {
 
+	@Path("/user")
 	@GET
 	@Produces(MediaType.APPLICATION_XML)
 	public User getUser() {
@@ -19,5 +20,12 @@ public class UserResource {
 		u.setUsername("sbley");
 		u.setEntryDate(new Date());
 		return u;
+	}
+
+	@Path("/hello")
+	@GET
+	@PoweredBy
+	public String helloWorld() {
+		return "Hello World";
 	}
 }
