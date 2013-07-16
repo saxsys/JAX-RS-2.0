@@ -1,23 +1,18 @@
 package de.saxsys.jax_rs.server;
 
-import org.glassfish.jersey.server.ResourceConfig;
+import java.util.HashSet;
+import java.util.Set;
 
-/**
- * Oder Jersey-frei:
- * 
- * <pre>
- * public class MyApplication extends Application {
- * 	&#064;Override
- * 	public Set&lt;Class&lt;?&gt;&gt; getClasses() {
- * 		Set&lt;Class&lt;?&gt;&gt; s = new HashSet&lt;Class&lt;?&gt;&gt;();
- * 		s.add(HelloWorldResource.class);
- * 		return s;
- * 	}
- * }
- * </pre>
- */
-public class MyApplication extends ResourceConfig {
-	public MyApplication() {
-		packages("de.saxsys.jax_rs.server");
+import javax.ws.rs.ApplicationPath;
+import javax.ws.rs.core.Application;
+
+@ApplicationPath("/")
+public class MyApplication extends Application {
+
+	@Override
+	public Set<Class<?>> getClasses() {
+		final Set<Class<?>> classes = new HashSet<Class<?>>();
+		classes.add(UserResource.class);
+		return classes;
 	}
 }
