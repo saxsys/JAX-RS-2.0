@@ -1,18 +1,16 @@
 package de.saxsys.jax_rs.server;
 
-import java.util.HashSet;
-import java.util.Set;
-
 import javax.ws.rs.ApplicationPath;
-import javax.ws.rs.core.Application;
+
+import org.glassfish.jersey.server.ResourceConfig;
+import org.glassfish.jersey.server.filter.RolesAllowedDynamicFeature;
 
 @ApplicationPath("/")
-public class MyApplication extends Application {
+public class MyApplication extends ResourceConfig {
 
-	@Override
-	public Set<Class<?>> getClasses() {
-		final Set<Class<?>> classes = new HashSet<Class<?>>();
-		classes.add(UserResource.class);
-		return classes;
+	public MyApplication() {
+		super();
+		packages("de.saxsys.jax_rs.server");
+		register(RolesAllowedDynamicFeature.class);
 	}
 }
