@@ -9,6 +9,7 @@ public class User {
 
 	private String username;
 	private Date entryDate;
+	private int age;
 
 	public String getUsername() {
 		return username;
@@ -26,4 +27,11 @@ public class User {
 		this.entryDate = entryDate;
 	}
 
+	public void setAge(int age) {
+		this.age = age;
+	}
+
+	public int getAge() {
+		return age;
+	}
 }
