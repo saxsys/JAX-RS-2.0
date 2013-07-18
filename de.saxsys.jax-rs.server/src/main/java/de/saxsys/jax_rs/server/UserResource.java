@@ -29,12 +29,12 @@ public class UserResource {
 	@GET
 	@Path("{id}")
 	@Produces(MediaType.APPLICATION_XML)
-	public User getUser(@PathParam("id") int id) {
+	public Response getUser(@PathParam("id") int id) {
 		User user = userService.getUser(id);
 		if (null == user) {
 			throw new WebApplicationException(Response.Status.NOT_FOUND);
 		}
-		return user;
+		return Response.ok(user).link(uriInfo.getRequestUri() + "/image", "profile").build();
 	}
 
 	@PUT

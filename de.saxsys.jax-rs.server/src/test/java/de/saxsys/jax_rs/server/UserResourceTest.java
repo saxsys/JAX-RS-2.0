@@ -1,6 +1,7 @@
 package de.saxsys.jax_rs.server;
 
 import static org.hamcrest.CoreMatchers.is;
+import static org.hamcrest.CoreMatchers.notNullValue;
 import static org.junit.Assert.assertThat;
 import static org.junit.Assert.fail;
 
@@ -31,8 +32,10 @@ public class UserResourceTest extends JerseyTest {
 
 	@Test
 	public void getUser1_returnsUserBley() throws Exception {
-		User user = target("user/1").request().get(User.class);
+		Response response = target("user/1").request().buildGet().invoke();
+		User user = response.readEntity(User.class);
 		assertThat(user.getUsername(), is("sbley"));
+		assertThat(response.getLink("profile"), is(notNullValue()));
 	}
 
 	@Test
