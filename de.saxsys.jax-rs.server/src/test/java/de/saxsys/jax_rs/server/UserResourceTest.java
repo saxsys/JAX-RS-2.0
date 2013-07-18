@@ -4,9 +4,12 @@ import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 import static org.junit.Assert.fail;
 
+import java.util.List;
+
 import javax.ws.rs.WebApplicationException;
 import javax.ws.rs.client.Entity;
 import javax.ws.rs.core.Application;
+import javax.ws.rs.core.GenericType;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
@@ -70,5 +73,13 @@ public class UserResourceTest extends JerseyTest {
 	public void deleteUser_returns404IfNotFound() throws Exception {
 		Response response = target("user/2").request().delete();
 		assertThat(response.getStatus(), is(404));
+	}
+
+	@Test
+	public void getUsers_returnsUsersWithOneElement() throws Exception {
+		List<User> users = target("user").request().get(new GenericType<List<User>>() {
+		});
+		assertThat(users.size(), is(1));
+		assertThat(users.get(0).getUsername(), is("sbley"));
 	}
 }

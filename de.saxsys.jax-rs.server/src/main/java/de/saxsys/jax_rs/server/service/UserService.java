@@ -1,5 +1,6 @@
 package de.saxsys.jax_rs.server.service;
 
+import java.util.Collection;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
@@ -27,5 +28,9 @@ public class UserService {
 
 	public User removeUser(int id) {
 		return users.remove(id);
+	}
+
+	public Collection<User> getAllUsers() {
+		return users.values();
 	}
 }

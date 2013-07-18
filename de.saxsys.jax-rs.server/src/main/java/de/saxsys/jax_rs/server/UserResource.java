@@ -1,5 +1,7 @@
 package de.saxsys.jax_rs.server;
 
+import java.util.Collection;
+
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
@@ -55,5 +57,11 @@ public class UserResource {
 			throw new WebApplicationException(Response.Status.NOT_FOUND);
 		}
 		return Response.ok().build();
+	}
+
+	@GET
+	@Produces(MediaType.APPLICATION_XML)
+	public Collection<User> getUsers() {
+		return userService.getAllUsers();
 	}
 }
