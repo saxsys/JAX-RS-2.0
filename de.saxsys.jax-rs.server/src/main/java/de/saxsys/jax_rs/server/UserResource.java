@@ -64,4 +64,11 @@ public class UserResource {
 	public Collection<User> getUsers() {
 		return userService.getAllUsers();
 	}
+
+	// Sub Resource
+	@Path("{id}/image")
+	public ImageResource getImageResource() {
+		return new ImageResource();
+	}
+
 }
