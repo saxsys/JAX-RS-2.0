@@ -21,10 +21,13 @@
 			<version>${jersey.version}</version>
 		</dependency>
 		<dependency>
-			<groupId>junit</groupId>
-			<artifactId>junit</artifactId>
-			<version>4.11</version>
-			<scope>test</scope>
+			<groupId>
+				org.glassfish.jersey.test-framework.providers
+			</groupId>
+			<artifactId>
+				jersey-test-framework-provider-grizzly2
+			</artifactId>
+			<version>${jersey.version}</version>
 		</dependency>
 	</dependencies>
 
