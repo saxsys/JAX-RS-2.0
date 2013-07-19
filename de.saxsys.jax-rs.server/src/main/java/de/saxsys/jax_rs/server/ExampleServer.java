@@ -12,8 +12,8 @@ import org.glassfish.jersey.server.ResourceConfig;
 public class ExampleServer {
 
 	/** http://localhost:8180/server/<resource> */
-	public static final URI BASE_URI = UriBuilder.fromUri("http://localhost").path("server")
-			.port(8180).build();
+	public static final URI BASE_URI = UriBuilder.fromUri("http://localhost").port(8180)
+			.path("server").build();
 
 	public static void main(String[] args) throws IOException {
 		System.out.println("Starting grizzly...");
