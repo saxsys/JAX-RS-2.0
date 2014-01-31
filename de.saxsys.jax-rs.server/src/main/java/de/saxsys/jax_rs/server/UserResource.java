@@ -10,9 +10,13 @@ import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.WebApplicationException;
+import javax.ws.rs.core.CacheControl;
 import javax.ws.rs.core.Context;
+import javax.ws.rs.core.EntityTag;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Request;
 import javax.ws.rs.core.Response;
+import javax.ws.rs.core.Response.ResponseBuilder;
 import javax.ws.rs.core.UriInfo;
 
 import de.saxsys.jax_rs.server.domain.User;
@@ -29,12 +33,25 @@ public class UserResource {
 	@GET
 	@Path("{id}")
 	@Produces(MediaType.APPLICATION_XML)
-	public User getUser(@PathParam("id") int id) {
+	public Response getUser(@PathParam("id") int id, @Context Request request) {
 		User user = userService.getUser(id);
 		if (null == user) {
 			throw new WebApplicationException(Response.Status.NOT_FOUND);
 		}
-		return user;
+		// set max-age
+		CacheControl cc = new CacheControl();
+		cc.setMaxAge(10);
+		cc.setPrivate(true);
+		// create tag
+		EntityTag etag = new EntityTag(user.getUsername()); // use hashCode()
+		ResponseBuilder builder = request.evaluatePreconditions(etag);
+		if (null == builder) {
+			// resource is out of date
+			builder = Response.ok(user);
+			builder.tag(etag);
+		}
+
+		return builder.cacheControl(cc).build();
 	}
 
 	@PUT
